@@ -14,7 +14,7 @@ public class DepartmentService{
 
     public Department create(Department department){
         department.setId(1);
-        if(departments.isEmpty()){
+        if(!departments.isEmpty()){
             department.setId(departments.size()+1);
         }
 

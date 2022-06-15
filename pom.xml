@@ -16,6 +16,7 @@
         <module>customer-service</module>
         <module>service-registry</module>
         <module>cloud-gateway</module>
+        <module>hystrix-dashboard</module>
     </modules>
 
     <properties>

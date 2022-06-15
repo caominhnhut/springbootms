@@ -7,14 +7,43 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: USER-SERVICE
+        - id: CUSTOMER-SERVICE
           uri: lb://CUSTOMER-SERVICE
           predicates:
             - Path=/users/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: CUSTOMER-SERVICE
+                fallbackUri: forward:/user-fallback
+                statusCodes:
+                  - 500
+                  - "NOT_FOUND"
         - id: DEPARTMENT-SERVICE
           uri: lb://DEPARTMENT-SERVICE
           predicates:
             - Path=/departments/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: DEPARTMENT-SERVICE
+                fallbackUri: forward:/department-fallback
+                statusCodes:
+                  - 500
+                  - "NOT_FOUND"
+hystrix:
+  command:
+    fallbackcmd:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 4000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
 
 ureka:
   client:
