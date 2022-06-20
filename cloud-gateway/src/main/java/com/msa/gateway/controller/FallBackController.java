@@ -16,4 +16,9 @@ public class FallBackController{
         return "Something wrong with department service";
     }
 
+    @GetMapping("/notification-fallback")
+    public String notificationFallBack(){
+        return "Something wrong with notification service";
+    }
+
 }

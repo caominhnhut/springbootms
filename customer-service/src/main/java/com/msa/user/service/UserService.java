@@ -26,6 +26,12 @@ public class UserService{
         }
 
         users.add(user);
+
+        // Call notification service to send notification
+        String message = restTemplate.getForObject("http://NOTIFICATION-SERVICE/notification/"+user.getId()+"/?target-type=user", String.class);
+
+        System.out.println(message);
+
         return user;
 
     }

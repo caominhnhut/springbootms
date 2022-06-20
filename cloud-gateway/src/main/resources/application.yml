@@ -31,6 +31,19 @@ spring:
                 statusCodes:
                   - 500
                   - "NOT_FOUND"
+        - id: NOTIFICATION-SERVICE
+          uri: lb://NOTIFICATION-SERVICE
+          predicates:
+            - Path=/notification/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: NOTIFICATION-SERVICE
+                fallbackUri: forward:/notification-fallback
+                statusCodes:
+                  - 500
+                  - "NOT_FOUND"
+
 hystrix:
   command:
     fallbackcmd:

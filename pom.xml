@@ -25,6 +25,7 @@
         <module>cloud-gateway</module>
         <module>hystrix-dashboard</module>
         <module>cloud-config-server</module>
+        <module>notification-service</module>
     </modules>
 
     <properties>
